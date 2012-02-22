@@ -13,14 +13,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.jbehave</groupId>
-            <artifactId>jbehave-core</artifactId>
-            <version>${jbehave.core.version}</version>
-        </dependency>
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.4</version>
+            <version>4.9</version>
         </dependency>
         <dependency>
             <groupId>info.cukes</groupId>
@@ -42,15 +37,20 @@
             <artifactId>cucumber-html</artifactId>
             <version>0.2.1</version>
         </dependency>
+        <dependency>
+            <groupId>apache-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.0</version>
+        </dependency>
     </dependencies>
 
     <build>
         <testResources>
             <testResource>
-                <directory>src/test/stories</directory>
-                <includes>
-                    <include>**/*.story</include>
-                </includes>
+                <directory>src/test/unit</directory>
+            </testResource>
+            <testResource>
+                <directory>src/test/acceptance</directory>
             </testResource>
         </testResources>
 
@@ -63,75 +63,7 @@
                     <target>1.6</target>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.jbehave</groupId>
-                <artifactId>jbehave-maven-plugin</artifactId>
-                <version>${jbehave.core.version}</version>
-                <executions>
-                    <execution>
-                        <id>run-stories-as-embeddables</id>
-                        <phase>integration-test</phase>
-                        <configuration>
-                            <includes>
-                                <include>**/*Scenarios.java</include>
-                            </includes>
-                            <ignoreFailureInStories>true</ignoreFailureInStories>
-                            <ignoreFailureInView>false</ignoreFailureInView>
-                        </configuration>
-                        <goals>
-                            <goal>run-stories-as-embeddables</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.3</version>
-                <executions>
-                    <execution>
-                        <id>unpack-jbehave-site-resources</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <overwriteReleases>false</overwriteReleases>
-                            <overwriteSnapshots>true</overwriteSnapshots>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.jbehave.site</groupId>
-                                    <artifactId>jbehave-site-resources</artifactId>
-                                    <version>3.1.1</version>
-                                    <type>zip</type>
-                                    <outputDirectory>${project.build.directory}/jbehave/view</outputDirectory>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>unpack-jbehave-reports-resources</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <overwriteReleases>false</overwriteReleases>
-                            <overwriteSnapshots>true</overwriteSnapshots>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.jbehave</groupId>
-                                    <artifactId>jbehave-core</artifactId>
-                                    <version>3.1.2</version>
-                                    <outputDirectory>${project.build.directory}/jbehave/view</outputDirectory>
-                                    <includes>**\/*.css,**\/*.ftl,**\/*.js</includes>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 

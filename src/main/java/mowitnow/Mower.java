@@ -1,5 +1,7 @@
 package mowitnow;
 
+import org.apache.commons.lang.StringUtils;
+
 public class Mower {
 
     private Position position = Position.atOrigin();
@@ -8,8 +10,13 @@ public class Mower {
     private Mower() {
     }
 
-    public Mower(Position initialPosition) {
-        this.position = initialPosition;
+    public Mower(int x, int y, String orientation) {
+        this.position = new Position(x, y);
+        this.orientation = Orientation.valueOf(StringUtils.capitalize(orientation.toLowerCase()));
+    }
+
+    public Mower(int x, int y) {
+        this(new Position(x, y), Orientation.North);
     }
 
     public Mower(Position initialPosition, Orientation orientation) {

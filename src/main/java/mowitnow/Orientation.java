@@ -1,5 +1,7 @@
 package mowitnow;
 
+import org.apache.commons.lang.StringUtils;
+
 public enum Orientation {
 
     North {
@@ -74,4 +76,5 @@ public enum Orientation {
     public abstract Orientation pivotLeft();
 
     public abstract Orientation pivotRight();
+
 }
