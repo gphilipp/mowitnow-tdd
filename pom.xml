@@ -8,7 +8,7 @@
 
     <properties>
         <jbehave.core.version>3.5.4</jbehave.core.version>
-        <cucumber.jvm.version>1.0.0.RC16</cucumber.jvm.version>
+        <cucumber.jvm.version>1.0.0.RC17-SNAPSHOT</cucumber.jvm.version>
     </properties>
 
     <dependencies>
@@ -58,6 +58,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
