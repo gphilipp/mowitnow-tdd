@@ -7,8 +7,7 @@
     <version>1.0</version>
 
     <properties>
-        <jbehave.core.version>3.5.4</jbehave.core.version>
-        <cucumber.jvm.version>1.0.0.RC17-SNAPSHOT</cucumber.jvm.version>
+        <cucumber.jvm.version>1.0.0.RC20</cucumber.jvm.version>
     </properties>
 
     <dependencies>
@@ -47,14 +46,55 @@
     <build>
         <testResources>
             <testResource>
-                <directory>src/test/unit</directory>
-            </testResource>
-            <testResource>
-                <directory>src/test/acceptance</directory>
+                <directory>src/test/resource</directory>
             </testResource>
         </testResources>
 
         <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.11</version>
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                </configuration>
+
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>CLI-test</id>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <echo>Running cucumber from the command line</echo>
+                                <mkdir dir="${basedir}/target/cukes"/>
+                                <java classname="cucumber.cli.Main" fork="true" failonerror="true" newenvironment="true"
+                                      maxmemory="512m" classpathref="maven.test.classpath">
+                                    <arg value="--dotcucumber"/>
+                                    <arg value="${basedir}/src/test/resource/.cucumber"/>
+                                    <arg value="--format"/>
+                                    <arg value="html"/>
+                                    <arg value="--out"/>
+                                    <arg value="target/cukes"/>
+                                    <arg value="--glue"/>
+                                    <arg value="mowitnow"/>
+                                    <arg value="${basedir}/src/test/resource"/>
+                                </java>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

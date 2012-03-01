@@ -6,12 +6,12 @@ import cucumber.annotation.en.When;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 
-public class MowLoanStepdefs {
+public class StepDefs {
 
     private Mower mower;
 
     @Given("^a mower in (\\d+),(\\d+) facing (.*)$")
-    public void a_mower_in_facing(int x, int y, String orientation) {
+    public void a_mower_in_facing(int x, int y, Orientation orientation) {
         mower = new Mower(x, y, orientation);
     }
 

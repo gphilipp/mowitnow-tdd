@@ -10,9 +10,9 @@ public class Mower {
     private Mower() {
     }
 
-    public Mower(int x, int y, String orientation) {
+    public Mower(int x, int y, Orientation orientation) {
         this.position = new Position(x, y);
-        this.orientation = Orientation.valueOf(StringUtils.capitalize(orientation.toLowerCase()));
+        this.orientation = orientation;
     }
 
     public Mower(int x, int y) {
@@ -50,5 +50,9 @@ public class Mower {
 
     public Orientation getOrientation() {
         return orientation;
+    }
+
+    public void setOrientation(Orientation orientation) {
+        this.orientation = orientation;
     }
 }
